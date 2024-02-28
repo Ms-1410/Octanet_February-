@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: url(111.jpg);
+        background-repeat: no-repeat;
+        background-size: 1200px 640px;
+    }
+    .container {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+    h1 {
+        text-align: center;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    li:last-child {
+        border-bottom: none;
+    }
+    .delete-btn {
+        float: right;
+        background-color: #f44336;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <br><br>
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="Add new task...">
+        <ul id="taskList"></ul>
+</div>
+</body>
+
+<script>
+    // Function to create a new task item
+    function createTask() {
+        var inputValue = document.getElementById("taskInput").value;
+        if (inputValue === '') {
+            alert("You must write something!");
+        } else {
+            var li = document.createElement("li");
+            var textNode = document.createTextNode(inputValue);
+            li.appendChild(textNode);
+            document.getElementById("taskList").appendChild(li);
+            document.getElementById("taskInput").value = "";
+
+            // Create a delete button for each task
+            var deleteBtn = document.createElement("button");
+            deleteBtn.appendChild(document.createTextNode("Delete"));
+            deleteBtn.setAttribute("class", "delete-btn");
+            deleteBtn.onclick = function () {
+                this.parentElement.remove();
+            };
+            li.appendChild(deleteBtn);
+        }
+    }
+
+    // Event listener for adding a new task
+    document.getElementById("taskInput").addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            createTask();
+        }
+    });
+</script>
+</body>
+</html>
